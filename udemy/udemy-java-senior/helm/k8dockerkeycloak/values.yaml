@@ -1,0 +1,22 @@
+deploymentName: k8dockerkeycloak-deployment
+deploymentLabel: k8dockerkeycloak
+appName: k8dockerkeycloak
+
+replicaCount: 1
+image:
+  repository: madalinaotvos/k8dockerkeycloak
+  tag: latest
+
+containerPort: 7089
+
+service:
+  type: ClusterIP
+  port: 7089
+  targetPort: 7089
+
+profile_enabled: true
+appname_enabled: true
+keycloak_enabled: false
+config_enabled: true
+resouceserver_enabled: true
+eureka_enabled: true

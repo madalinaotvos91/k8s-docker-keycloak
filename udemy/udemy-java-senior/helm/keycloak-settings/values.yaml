@@ -1,0 +1,3 @@
+extraEnvVars:
+  - name: KC_PROXY
+    value: edge

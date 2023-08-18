@@ -1,0 +1,26 @@
+deploymentName: gatewayserver-deployment
+deploymentLabel: gatewayserver
+appName: gatewayserver
+
+replicaCount: 1
+
+image:
+  repository: madalinaotvos/gatewayserver
+  tag: latest
+
+containerPort: 8072
+env:
+  - name: eureka.instance.preferIpAddress
+    value: "true"
+
+service:
+  type: ClusterIP
+  port: 8072
+  targetPort: 8072
+
+appname_enabled: true
+config_enabled: true
+profile_enabled: true
+keycloak_enabled: true
+resouceserver_enabled: false
+eureka_enabled: true
