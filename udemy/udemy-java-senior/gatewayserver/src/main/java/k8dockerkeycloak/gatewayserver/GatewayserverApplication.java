@@ -16,28 +16,26 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableEurekaClient
 @ComponentScan(basePackages = "k8dockerkeycloak.gatewayserver.security")
 public class GatewayserverApplication {
-    @Autowired
-    private TokenRelayGatewayFilterFactory tokenRelayGatewayFilterFactory;
-    @Autowired
-    private EurekaClient discoveryClient;
-    @Autowired
-    private TokenRelayGatewayFilterFactory filterFactory;
+	@Autowired
+	private TokenRelayGatewayFilterFactory tokenRelayGatewayFilterFactory;
+	@Autowired
+	private EurekaClient discoveryClient;
 
-    public static void main(String[] args) {
-        SpringApplication.run(GatewayserverApplication.class, args);
-    }
+	public  String serviceUrl() {
+		InstanceInfo instance = discoveryClient.getNextServerFromEureka("K8DOCKERKEYCLOAK", false);
 
-    public String serviceUrl() {
-        InstanceInfo instance = discoveryClient.getNextServerFromEureka("K8DOCKERKEYCLOAK", false);
-        return instance.getHomePageUrl();
-    }
+		return instance.getHomePageUrl();
+	}
+	public static void main(String[] args) {
+		SpringApplication.run(GatewayserverApplication.class, args);
+	}
 
-    @Bean
-    public RouteLocator myRoutes(RouteLocatorBuilder builder) {
-        return builder.routes()
-                .route(p -> p.path("/app/**")
-                        .filters(f -> f.filters(tokenRelayGatewayFilterFactory.apply()).rewritePath("/app/(?<segment>.*)", "/api/${segment}")
-                                .removeRequestHeader("Cookies"))
-                        .uri(serviceUrl())).build();
-    }
+	@Bean
+	public RouteLocator myRoutes(RouteLocatorBuilder builder) {
+		return builder.routes()
+				.route(p -> p.path("/**")
+						.filters(f -> f.filters(tokenRelayGatewayFilterFactory.apply()).rewritePath("/(?<segment>.*)","/${segment}")
+								.removeRequestHeader("Cookies"))
+						.uri(serviceUrl())).build();
+	}
 }

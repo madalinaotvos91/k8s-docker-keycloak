@@ -13,7 +13,7 @@ spec:
     - http:
         paths:
           - pathType: Prefix
-            path: "/api/greeting"
+            path: "/app/greeting"
             backend:
               service:
                 name: gatewayserver

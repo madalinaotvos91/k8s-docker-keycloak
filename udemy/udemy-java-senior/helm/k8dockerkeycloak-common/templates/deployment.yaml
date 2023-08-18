@@ -89,13 +89,6 @@ spec:
                   name: {{ .Values.global.configMapName }}
                   key: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_USERINFO-URI
         {{- end }}
-       {{- if .Values.keycloak_enabled }}
-            - name: GATEWAY_REDIRECTURL
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Values.global.configMapName }}
-                  key: GATEWAY_REDIRECTURL
-       {{- end }}
         {{- if .Values.keycloak_enabled }}
             - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GATEWAY_REDIRECT-URI
               valueFrom:
