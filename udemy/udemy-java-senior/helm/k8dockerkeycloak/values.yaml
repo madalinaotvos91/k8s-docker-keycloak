@@ -6,7 +6,7 @@ replicaCount: 1
 image:
   repository: madalinaotvos/k8dockerkeycloak
   tag: latest
-
+  imagePullPolicy: Always
 containerPort: 7089
 
 service:

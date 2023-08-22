@@ -1,0 +1,15 @@
+global:
+  configMapName: k8dockerkeycloak-configmap
+  activeProfile: prod
+  configServerURL: configserver:http://configserver:8071/
+  tokenuri: http://WRITE_YOUR_KEYCLOAK_INGRESS_EXPOSED_IP/realms/master/protocol/openid-connect/token
+  jwkUrl: http://WRITE_YOUR_KEYCLOAK_INGRESS_EXPOSED_IP/realms/master/protocol/openid-connect/certs
+  authorizationuri: http://WRITE_YOUR_KEYCLOAK_INGRESS_EXPOSED_IP/realms/master/protocol/openid-connect/auth
+  eurekaServerURL: http://eurekaserver:8070/eureka/
+  gatewayIssuerUri: http://WRITE_YOUR_KEYCLOAK_INGRESS_EXPOSED_IP/realms/master
+  userinfouri: http://WRITE_YOUR_KEYCLOAK_INGRESS_EXPOSED_IP/realms/master/protocol/openid-connect/userinfo
+  keycloakredirecturi: http://WRITE_YOUR_GATEWAY_APP_INGRESS_EXPOSED_IP/login/oauth2/code/keycloak
+  keycloakclientid: WRITE_YOUR_KEYCLOAK_CLIENT_ID
+  keycloakclientsecret: WRITE_YOUR_KEYCLOAK_CLIENT_SECRET
+  secretName: gatewayserver-secret
+  ipAddress: 'true'
